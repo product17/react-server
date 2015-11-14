@@ -1,0 +1,15 @@
+*.sublime-project
+*.sublime-workspace
+node_modules/
+build/
+public/javascripts/
+app/*/components/build
+*.pxm
+bower_components/
+
+# OS generated files #
+######################
+._*
+.DS_STORE
+.DS_Store
+.DE_STORE?
