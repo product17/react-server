@@ -15,14 +15,18 @@ var TopMenu = React.createClass({
 
   render: function() {
     var links = this.state.links ? this.state.links : this.props.links;
+    var logo = this.state.logo ? this.state.logo : this.props.logo;
 
     var link_list = _.map(links, function (item, i) {
       return <TopLink key={i} link={item} />
     });
 
     return (
-      <nav className='navbar navbar-default'>
+      <nav className='navbar'>
         <div className='container-fluid'>
+          <a className='logo pull-left' href='/'>
+            <img src={logo.url} />
+          </a>
           <ul className='nav navbar-nav'>
             {link_list}
           </ul>

@@ -31,10 +31,13 @@ var tmp_links = [
     },
 ];
 
+var logo = {
+    url: '/public/images/concur_logo.png',
+}
 
 module.exports.add_top_menu = function (req, res, next) {
 
-    res.locals.reactMenu = ReactDOM.renderToString(TopMenu({links: tmp_links}));
+    res.locals.reactMenu = ReactDOM.renderToString(TopMenu({links: tmp_links, logo: logo}));
 
     next();
 }
@@ -42,9 +45,10 @@ module.exports.add_top_menu = function (req, res, next) {
 // Home page render
 module.exports.index = function (req, res) {
     res.render('index', {
-        reactContent: ReactDOM.renderToString(TopMenu({links: tmp_links})),
+        reactContent: ReactDOM.renderToString(TopMenu({links: tmp_links, logo: logo})),
         client_menu_data: {
             link_list: tmp_links,
+            logo: logo,
         },
     });
 }

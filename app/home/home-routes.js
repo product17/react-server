@@ -14,7 +14,7 @@ router.route('/login')
     .get(home.index);
 
 router.route('/about')
-    .get(home.index);
+    .get(home.about);
 
 
 module.exports = router;

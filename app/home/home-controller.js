@@ -1,8 +1,5 @@
 'use strict';
 
-// Compiles the jsx for use on the server
-require('babel-core/register');
-
 var async     = require('async'),
     React     = require('react'),
     ReactDOM  = require('react-dom/server');
@@ -22,6 +19,17 @@ module.exports.index = function (req, res) {
         client_data: {
           wat: 'test',
           name: 'Wat Man',
+        },
+    });
+}
+
+// About page render
+module.exports.about = function (req, res) {
+    res.render('index', {
+        reactContent: ReactDOM.renderToString(helloMessage({name: "Wat Man"})),
+        client_data: {
+          title: 'The prim and propper',
+          body: '<p>The Content goes here</p>',
         },
     });
 }
