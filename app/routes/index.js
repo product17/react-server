@@ -7,6 +7,7 @@ var express = require('express'),
 // Link to the different modules for the site
 var home      = require('../home').routes,
     articles  = require('../articles').routes,
+    users      = require('../users').routes,
     menus     = require('../menus').routes;
 
 // Link to menu controller
@@ -22,8 +23,10 @@ app.set('views', path.join(__dirname, '../views'));
 app.use(menus_controller.add_top_menu);
 
 // Set the root paths
-app.use('/', home);
+
+app.use('/user', users);
 app.use('/', articles);
+app.use('/', home);
 
 
 module.exports = app;

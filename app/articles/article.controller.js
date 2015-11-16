@@ -1,6 +1,6 @@
 'use strict';
 
-var articleModel = require('./article-model');
+var articleModel = require('./article.model');
 
 exports.getArticleById = function (id) {
   return {

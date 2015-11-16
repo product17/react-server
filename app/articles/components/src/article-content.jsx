@@ -26,5 +26,5 @@ var ArticleContent = React.createClass({
 if (isNode) {
     exports.ArticleContent = ArticleContent;
 } else {
-    ReactDOM.render(<ArticleContent article={client_data} />, document.getElementById('react-root'));
+    /*ReactDOM.render(<ArticleContent article={client_data} />, document.getElementById('react-root'));*/
 }

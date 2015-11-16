@@ -5,12 +5,11 @@ var express = require('express'),
     path    = require('path');
 
 // Controller
-var menu = require('./menu-controller');
+var article = require('./article.presenter');
 
-// Route list
-router.route('/')
-    .get(menu.index);
+router.route('/:id')
+    .get(article.byId);
 
 
-// Export
+
 module.exports = router;

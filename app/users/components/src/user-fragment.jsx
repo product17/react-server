@@ -7,18 +7,14 @@ var HelloMessage = React.createClass({
     return {};
   },
 
-  handleClick: function () {
-    alert('You clicked!');
-  },
-
   render: function() {
-    var name = this.state.name ? this.state.name : this.props.name;
-    return <div onClick={this.handleClick}>Hello {name}</div>;
+    var user = this.state.user ? this.state.user : this.props.user;
+    return <div onClick={this.handleClick}>Hello {user.name}</div>;
   },
 });
 
 if (isNode) {
   exports.HelloMessage = HelloMessage;
 } else {
-  ReactDOM.render(<HelloMessage name={client_data.name} />, document.getElementById('react-root'));
+  ReactDOM.render(<HelloMessage name={init_data.name} />, document.getElementById('react-root'));
 }

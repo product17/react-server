@@ -1,7 +1,7 @@
 'use strict';
 
 // export routes
-module.exports.routes = require('./menu-routes');
+module.exports.routes = require('./menu.routes');
 
 // Export controllers
-module.exports.controller = require('./menu-controller');
+module.exports.controller = require('./menu.controller');

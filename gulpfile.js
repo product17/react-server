@@ -5,7 +5,7 @@ var gulp    = require('gulp'),
     react   = require('gulp-react');
 
 gulp.task('jsx-components', function () {
-    return gulp.src('./app/**/components/**/*.jsx')
+    return gulp.src('./app/**/components/src/**/*.jsx')
         .pipe(react())
         .pipe(gulp.dest('public/javascripts'))
         .pipe(rename(function (path) {

@@ -5,11 +5,12 @@ var express = require('express'),
     path    = require('path');
 
 // Controller
-var home = require('./article-render');
+var user = require('./user.presenter');
 
-router.route('/:id')
-    .get(home.article);
+// Route list
+router.route('/')
+    .get(user.list);
 
 
-
+// Export
 module.exports = router;

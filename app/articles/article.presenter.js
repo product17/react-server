@@ -5,7 +5,7 @@ var async     = require('async'),
     ReactDOM  = require('react-dom/server');
 
 // Controller
-var article_ctrl = require('./article-controller');
+var article_ctrl = require('./article.controller');
 
 // Include Components
 var component_ArticleContent = require('./components/build/article-content').ArticleContent;
@@ -15,7 +15,7 @@ var ArticleContent = React.createFactory(component_ArticleContent);
 
 
 // Render Article
-exports.article = function (req, res) {
+exports.byId = function (req, res) {
     var data = article_ctrl.getArticleById();
 
     res.render('index', {
