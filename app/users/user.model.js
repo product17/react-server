@@ -25,55 +25,55 @@ var validateLocalStrategyPassword = function(password) {
  * User Schema
  */
 var UserSchema = new Schema({
-	firstName: {
+	first_name: {
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your first name']
+		validate: [validateLocalStrategyProperty, 'Please fill in your first name'],
+		form: {
+			type: 'input',
+		},
 	},
-	lastName: {
+	last_name: {
 		type: String,
 		trim: true,
 		default: '',
-		validate: [validateLocalStrategyProperty, 'Please fill in your last name']
+		validate: [validateLocalStrategyProperty, 'Please fill in your last name'],
+		form: {
+			type: 'input',
+		},
 	},
-	displayName: {
+	display_name: {
 		type: String,
-		trim: true
+		trim: true,
 	},
 	email: {
 		type: String,
 		trim: true,
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
-		match: [/.+\@.+\..+/, 'Please fill a valid email address']
-	},
-	username: {
-		type: String,
-		unique: 'testing error message',
-		required: 'Please fill in a username',
-		trim: true
+		match: [/.+\@.+\..+/, 'Please fill a valid email address'],
+		form: {
+			type: 'input',
+		},
 	},
 	password: {
 		type: String,
 		default: '',
-		validate: [validateLocalStrategyPassword, 'Password should be longer']
+		validate: [validateLocalStrategyPassword, 'Password should be longer'],
+		form: {
+			type: 'input',
+		},
 	},
 	salt: {
 		type: String
 	},
-	provider: {
-		type: String,
-		required: 'Provider is required'
-	},
-	providerData: {},
-	additionalProvidersData: {},
 	roles: {
 		type: [{
 			type: String,
-			enum: ['user', 'admin']
+			enum: ['basic', 'admin', 'dev']
 		}],
-		default: ['user']
+		default: ['basic']
 	},
 	updated: {
 		type: Date

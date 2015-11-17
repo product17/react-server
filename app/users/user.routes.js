@@ -5,11 +5,15 @@ var express = require('express'),
     path    = require('path');
 
 // Controller
-var user = require('./user.presenter');
+var presenter 	= require('./user.presenter'),
+	controller 	= require('./user.controller');
 
 // Route list
 router.route('/')
-    .get(user.list);
+    .get(presenter.list);
+
+router.route('/new')
+	.get(presenter.create_form)
 
 
 // Export

@@ -23,10 +23,9 @@ app.set('views', path.join(__dirname, '../views'));
 app.use(menus_controller.add_top_menu);
 
 // Set the root paths
-
-app.use('/user', users);
-app.use('/', articles);
 app.use('/', home);
+app.use('/articles', articles);
+app.use('/user', users);
 
 
 module.exports = app;
