@@ -9,7 +9,9 @@ var HelloMessage = React.createClass({
 
   render: function() {
     var user = this.state.user ? this.state.user : this.props.user;
-    return <div onClick={this.handleClick}>Hello {user.name}</div>;
+    return (
+      <div onClick={this.handleClick}>Hello {user.name}</div>
+    );
   },
 });
 

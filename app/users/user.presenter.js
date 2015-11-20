@@ -11,10 +11,12 @@ var async     = require('async'),
 var controller = require('./user.controller');
 
 // Include Components
-var component_UserList = require('./components/build/user-list');
+var component_UserList  = require('./components/build/user-list'),
+    component_UserNew   = require('./components/build/user-new');
 
 // Setup Components
-var UserList = React.createFactory(component_UserList.UserList);
+var UserList    = React.createFactory(component_UserList.UserList),
+    UserNew     = React.createFactory(component_UserNew);
 
 
 
@@ -31,12 +33,12 @@ module.exports.list = function (req, res) {
 
 // Create Form
 module.exports.create_form = function (req, res) {
-	var user_data = controller.getFormSchema();
-
-	console.log(user_data);
+	var form_schema = controller.getFormSchema();
 
 	res.render('index', {
-		reactContent: 'ReactDOM.renderToString({})',
-		client_data: {},
+		reactContent: ReactDOM.renderToString(UserNew({form_schema: form_schema})),
+		client_data: {
+            form_schema
+        },
 	});
 }

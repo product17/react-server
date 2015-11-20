@@ -21,6 +21,7 @@
     "glob": "^6.0.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.1.0",
+    "gulp-preprocess": "^1.2.0",
     "gulp-react": "^3.1.0",
     "gulp-rename": "^1.2.2",
     "helmet": "^0.14.0",

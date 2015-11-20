@@ -11,10 +11,14 @@ module.exports.getFormSchema = function () {
   var list = [];
 
   _.forOwn(User.schema.tree, function (item, key) {
-    var tmp = {
-      name: key,
+    
+    if (item.form) {
+      list.push({
+        name: key,
+        field: item.form,
+      });
     }
-    list.push(_.extend(tmp, item));
   });
-  return _.filter(list, {render: true});
+
+  return list;
 };

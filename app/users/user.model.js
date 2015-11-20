@@ -31,7 +31,10 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your first name'],
 		form: {
-			type: 'input',
+			type: 'text',
+			elem: 'input',
+			wrapper_classes: 'form-group',
+			value: '',
 		},
 	},
 	last_name: {
@@ -40,7 +43,10 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your last name'],
 		form: {
-			type: 'input',
+			type: 'text',
+			elem: 'input',
+			wrapper_classes: 'form-group',
+			value: '',
 		},
 	},
 	display_name: {
@@ -54,7 +60,10 @@ var UserSchema = new Schema({
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address'],
 		form: {
-			type: 'input',
+			type: 'text',
+			elem: 'input',
+			wrapper_classes: 'form-group',
+			value: '',
 		},
 	},
 	password: {
@@ -62,7 +71,10 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer'],
 		form: {
-			type: 'input',
+			type: 'text',
+			elem: 'input',
+			wrapper_classes: 'form-group',
+			value: '',
 		},
 	},
 	salt: {
