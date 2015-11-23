@@ -1,22 +1,22 @@
-var isNode = typeof module !== 'undefined' && module.exports,
-    React = isNode ? require('react') : window.React,
-    ReactDOM = isNode ? require('react') : window.ReactDOM;
+// @ifdef IS_NODE
+var React = require('react'),
+    _     = require('lodash');
+// @endif
 
-var HelloMessage = React.createClass({
+var UserFragment = React.createClass({
   getInitialState: function () {
     return {};
   },
 
   render: function() {
-    var user = this.state.user ? this.state.user : this.props.user;
+    var user = this.state.user_info ? this.state.user_info : this.props.user_info;
+
     return (
-      <div onClick={this.handleClick}>Hello {user.name}</div>
+      <div>Hello {user.display_name}</div>
     );
   },
 });
 
-if (isNode) {
-  exports.HelloMessage = HelloMessage;
-} else {
-  ReactDOM.render(<HelloMessage name={init_data.name} />, document.getElementById('react-root'));
-}
+// @ifdef IS_NODE
+module.exports = UserFragment;
+// @endif

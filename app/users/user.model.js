@@ -31,10 +31,7 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your first name'],
 		form: {
-			type: 'text',
 			elem: 'input',
-			wrapper_classes: 'form-group',
-			value: '',
 		},
 	},
 	last_name: {
@@ -43,10 +40,7 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your last name'],
 		form: {
-			type: 'text',
 			elem: 'input',
-			wrapper_classes: 'form-group',
-			value: '',
 		},
 	},
 	display_name: {
@@ -60,10 +54,7 @@ var UserSchema = new Schema({
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address'],
 		form: {
-			type: 'text',
 			elem: 'input',
-			wrapper_classes: 'form-group',
-			value: '',
 		},
 	},
 	password: {
@@ -71,21 +62,25 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer'],
 		form: {
-			type: 'text',
 			elem: 'input',
-			wrapper_classes: 'form-group',
-			value: '',
 		},
 	},
 	salt: {
 		type: String
 	},
+	provider: {
+		type: String,
+		default: 'local',
+		required: 'Provider is required'
+	},
+	providerData: {},
+	additionalProvidersData: {},
 	roles: {
 		type: [{
 			type: String,
-			enum: ['basic', 'admin', 'dev']
+			enum: ['author', 'admin', 'dev']
 		}],
-		default: ['basic']
+		default: ['author']
 	},
 	updated: {
 		type: Date
@@ -131,28 +126,6 @@ UserSchema.methods.hashPassword = function(password) {
  */
 UserSchema.methods.authenticate = function(password) {
 	return this.password === this.hashPassword(password);
-};
-
-/**
- * Find possible not used username
- */
-UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
-	var _this = this;
-	var possibleUsername = username + (suffix || '');
-
-	_this.findOne({
-		username: possibleUsername
-	}, function(err, user) {
-		if (!err) {
-			if (!user) {
-				callback(possibleUsername);
-			} else {
-				return _this.findUniqueUsername(username, (suffix || 0) + 1, callback);
-			}
-		} else {
-			callback(null);
-		}
-	});
 };
 
 mongoose.model('User', UserSchema);

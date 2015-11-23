@@ -3,9 +3,14 @@
 var gulp        = require('gulp'),
     rename      = require('gulp-rename'),
     preprocess  = require('gulp-preprocess'),
-    react       = require('gulp-react');
+    react       = require('gulp-react'),
+    help        = require('gulp-task-listing');
 
-gulp.task('jsx-components', function () {
+gulp.task('help', help)
+
+gulp.task('server', ['server-jsx']);
+
+gulp.task('server-jsx', function () {
     return gulp.src('./app/**/components/src/**/*.jsx')
         .pipe(preprocess({
             context: {
@@ -20,7 +25,9 @@ gulp.task('jsx-components', function () {
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('client', function () {
+gulp.task('client', ['client-jsx']);
+
+gulp.task('client-jsx', function () {
     return gulp.src('./app/**/components/src/**/*.jsx')
         .pipe(preprocess({
             context: {},
@@ -31,7 +38,7 @@ gulp.task('client', function () {
 });
 
 gulp.task('watch-jsx', function () {
-    return gulp.watch('./app/**/*.jsx', ['jsx-components', 'client']);
+    return gulp.watch('./app/**/*.jsx', ['server', 'client']);
 });
 
-gulp.task('default', ['client', 'jsx-components']);
+gulp.task('default', ['client', 'server']);

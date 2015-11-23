@@ -12,17 +12,15 @@ var UserNew = React.createClass({
   render: function() {
     var form_schema = this.state.form_schema ? this.state.form_schema : this.props.form_schema;
 
-
     var fields = _.map(form_schema, function (field, i) {
-console.log(field)
       return <FormField key={i} field_info={field} />
     });
 
-    // console.log(fields);
-
     return (
-      <div>
-        {fields}
+      <div className='col-sm-6 col-sm-offset-3'>
+        <form action='/user/new' method='post'>
+          {fields}
+        </form>
       </div>
     );
   },

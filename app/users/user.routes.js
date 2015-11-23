@@ -14,6 +14,7 @@ router.route('/')
 
 router.route('/new')
 	.get(presenter.create_form)
+  .post(presenter.create);
 
 
 // Export

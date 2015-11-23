@@ -8,21 +8,19 @@ var FormInput = React.createClass({
     return {};
   },
 
+  niceName: function (name) {
+    return (name.charAt(0).toUpperCase() + name.slice(1)).replace(/_/g, ' ');
+  },
+
   render: function() {
 
-    var field_info = this.state.field_info ? this.state.field_info : this.props.field_info;
-
-    // Set defaults
-    field_info.type = field_info.field.type || '';
-    field_info.value = field_info.field.value || '';
-
-    var tmp_label = field_info.name.charAt(0).toUpperCase() + field_info.name.slice(1);
-    field_info.label = tmp_label.replace(/_/g, ' ');
+    var field_info  = this.state.field_info ? this.state.field_info : this.props.field_info,
+        label       = this.niceName(field_info.name);
 
     return (
-      <div className={field_info.field.wrapper_classes || ''}>
-        <label for={field_info.name}>{field_info.label}</label>
-        <input name={field_info.name} className='form-control' type={field_info.type} value={field_info.value} placeholder={field_info.label} />
+      <div className={field_info.wrapper_class}>
+        <label for={field_info.name}>{label}</label>
+        <input name={field_info.name} className={field_info.field_class} type={field_info.type} value={field_info.value} placeholder={label} />
       </div>
     );
   },
