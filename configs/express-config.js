@@ -16,6 +16,7 @@ var fs = require('fs'),
   	helmet = require('helmet'),
   	passport = require('passport'),
     glob = require('glob'),
+    uuid = require('uuid'),
   	mongoStore = require('connect-mongo')(session),
   	flash = require('connect-flash'),
   	config = require('./config'),
@@ -107,6 +108,7 @@ module.exports = function(db) {
 
   	// Express MongoDB session storage
   	app.use(session({
+      genuuid: uuid.v1,
   		saveUninitialized: true,
   		resave: true,
   		secret: config.sessionSecret,

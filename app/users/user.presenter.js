@@ -11,12 +11,16 @@ var async     = require('async'),
 var controller = require('./user.controller');
 
 // Include Components
-var component_UserList  = require('./components/build/user-list'),
-    component_UserNew   = require('./components/build/user-new');
+var component_UserList    = require('./components/build/user-list'),
+    component_UserNew     = require('./components/build/user-new'),
+    component_UserDetails = require('./components/build/user-details'),
+    component_UserLogin   = require('./components/build/user-login');
 
 // Setup Components
 var UserList    = React.createFactory(component_UserList),
-    UserNew     = React.createFactory(component_UserNew);
+    UserNew     = React.createFactory(component_UserNew),
+    UserDetails = React.createFactory(component_UserDetails),
+    UserLogin = React.createFactory(component_UserLogin);
 
 
 // Create Form
@@ -33,14 +37,14 @@ module.exports.create_form = function (req, res) {
     },
   ];
 
-	var form_schema = controller.getFormSchema(form_schema);
+  var form_schema = controller.getFormSchema(form_schema);
 
-	res.render('index', {
-		reactContent: ReactDOM.renderToString(UserNew({form_schema: form_schema})),
-		client_data: {
-        form_schema
+  res.render('index', {
+    reactContent: ReactDOM.renderToString(UserNew({form_schema: form_schema})),
+    client_data: {
+      form_schema
     },
-	});
+  });
 }
 
 // Create User Handler
@@ -49,7 +53,7 @@ module.exports.create = function (req, res) {
   controller.create(req.body)
     .then(function (user) {
       console.log(user)
-      res.redirect('/user/' + user._id);
+      res.redirect('/user/details/' + user._id);
     })
     .catch(function (err) {
       console.log(err);
@@ -59,11 +63,59 @@ module.exports.create = function (req, res) {
 
 
 // Render All Users
-module.exports.list = function (req, res) {
-    res.render('index', {
-        reactContent: ReactDOM.renderToString(UserList({users: 'wat man'})),
+module.exports.list = function (req, res, next) {
+
+  controller.list()
+    .then(function (list) {
+      res.render('index', {
+        reactContent: ReactDOM.renderToString(UserList({user_list: list})),
         client_data: {
-          users: 'wat man',
+          user_list: list,
         },
+      });
+    })
+    .catch(function (err) {
+
+      // This should send the stack trace
+      next(err);
     });
 }
+
+
+module.exports.details = function (req, res, next) {
+console.log(req.isAuthenticated())
+  controller.details(req.params._id)
+    .then(function (user) {
+      res.render('index', {
+        reactContent: ReactDOM.renderToString(UserDetails({user: user})),
+        client_data: {
+          user: user,
+        },
+      });
+    })
+    .catch(function (err) {
+
+      // This should send the stack trace
+      next(err);
+    });
+}
+
+module.exports.login = function (req, res, next) {
+  var form_schema = [
+    {name: 'email'},
+    {name: 'password'},
+    {
+      name: 'submit',
+      value: 'Login',
+      field_class: 'btn btn-primary pull-right',
+    },
+  ];
+
+  var form_schema = controller.getFormSchema(form_schema);
+
+  res.render('index', {
+    reactContent: ReactDOM.renderToString(UserLogin({form_schema: form_schema})),
+    client_data: {},
+  });
+}
+

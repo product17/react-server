@@ -3,10 +3,10 @@
 /**
  * Module dependencies.
  */
-var passport = require('passport'),
-	User = require('mongoose').model('User'),
-	path = require('path'),
-	config = require('./config');
+var passport 	= require('passport'),
+	User 		= require('mongoose').model('User'),
+	path 		= require('path'),
+	glob 		= require('glob');
 
 /**
  * Module init function.
@@ -28,7 +28,7 @@ module.exports = function() {
 	});
 
 	// Initialize strategies
-	config.getGlobbedFiles('./config/strategies/**/*.js').forEach(function(strategy) {
+	glob('./configs/strategies/*.js', {sync: true}).forEach(function(strategy) {
 		require(path.resolve(strategy))();
 	});
 };

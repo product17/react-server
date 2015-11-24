@@ -18,6 +18,8 @@ var db = mongoose.connect('mongodb://localhost/react', function (err) {
 // Init the express application
 var app = require('./configs/express-config')(db);
 
+require('./configs/passport-config')();
+
 // Bootstrap passport config
 // require('./configs/passport-config')();
 

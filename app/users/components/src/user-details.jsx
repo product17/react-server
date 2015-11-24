@@ -5,28 +5,21 @@ var UserListItem  = require('./user-list-item'),
 // @endif
 
 var UserList = React.createClass({
+
   getInitialState: function () {
     return {};
   },
 
-  renderUser: function (user, key) {
-    return (
-      <div className='well'>
-        <h4>Name: {user.display_name}</h4>
-        <p>Email: {user.email}</p>
-        <a href={'/user/details/' + user._id}>Details</a>
-      </div>
-    );
-  },
-
   render: function() {
-    var user_list = this.state.user_list ? this.state.user_list : this.props.user_list;
-
-    var users = _.map(user_list, this.renderUser);
+    var user = this.state.user ? this.state.user : this.props.user;
 
     return (
       <div className='col-sm-6 col-sm-offset-3'>
-        {users}
+        <div className='well'>
+          <h4>Name: {user.display_name}</h4>
+          <p>Email: {user.email}</p>
+          <a href={'/user/edit/' + user._id}></a>
+        </div>
       </div>
     );
   },

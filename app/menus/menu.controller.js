@@ -26,7 +26,7 @@ var tmp_links = [
         display_name: 'about',
     },
     {
-        url: '/login',
+        url: '/user/login',
         display_name: 'login',
     },
 ];

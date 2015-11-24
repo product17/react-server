@@ -8,6 +8,7 @@ var _           = require('lodash'),
 
 
 
+// This is a syncronous function, it has no database hits
 module.exports.getFormSchema = function (field_list) {
   var schema  = User.schema.tree;
 
@@ -35,7 +36,11 @@ module.exports.getFormSchema = function (field_list) {
   return list;
 };
 
-
+/**
+ * Post new user to DB
+ * @param  {Object} user_data The data from the form (req.body)
+ * @return {Promise}          Returns a Promise to handle the Async DB insert
+ */
 module.exports.create = function (user_data) {
   return new Promise(function (resolve, reject) {
 
@@ -50,8 +55,10 @@ module.exports.create = function (user_data) {
       if (err) {
         reject(err);
       } else {
-        user.password = undefined;
-        user.salt = undefined;
+
+        // Security
+        delete user.password;
+        delete user.salt;
 
         resolve(user);
       }
@@ -59,15 +66,44 @@ module.exports.create = function (user_data) {
   });
 }
 
-
+/**
+ * Get a paginated list of users
+ * ToDo: add Pagination...
+ * @return {Promise} Returns a Promise to handle the async DB call
+ */
 module.exports.list = function () {
   return new Promise(function (resolve, reject) {
-    User.find({}, function (err, data) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(data);
-      }
-    })
+
+    // Exclude password and salt for security
+    User.find({}, {password: 0, salt: 0})
+      .sort({'created': -1})
+      .limit(20)
+      .exec(function (err, data) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data);
+        }
+      });
+  });
+}
+
+/**
+ * Get the details of a single user by _id
+ * @param  _id {String} unique selector for a user
+ * @return {Promise} Returns a Promise to handle the async DB call
+ */
+module.exports.details = function (_id) {
+  return new Promise(function (resolve, reject) {
+
+    // Exclude password and salt for security
+    User.find({_id: _id}, {password: 0, salt: 0})
+      .exec(function (err, data) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(data[0]);
+        }
+      });
   });
 }
