@@ -15,14 +15,15 @@ module.exports = function() {
 
 	// Serialize sessions
 	passport.serializeUser(function(user, done) {
-		done(null, user._id);
+		done(null, user.id);
 	});
 
 	// Deserialize sessions
 	passport.deserializeUser(function(id, done) {
 		User.findOne({
 			_id: id
-		}, '-salt -password', function(err, user) {
+		}, {password: 0, salt: 0}, function(err, user) {
+			console.log(err, user);
 			done(err, user);
 		});
 	});

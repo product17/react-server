@@ -83,7 +83,6 @@ module.exports.list = function (req, res, next) {
 
 
 module.exports.details = function (req, res, next) {
-console.log(req.isAuthenticated())
   controller.details(req.params._id)
     .then(function (user) {
       res.render('index', {
@@ -100,7 +99,7 @@ console.log(req.isAuthenticated())
     });
 }
 
-module.exports.login = function (req, res, next) {
+module.exports.login = function (req, res) {
   var form_schema = [
     {name: 'email'},
     {name: 'password'},
@@ -119,3 +118,22 @@ module.exports.login = function (req, res, next) {
   });
 }
 
+
+/**
+ * Test that the user is logged in or not
+ */
+module.exports.isLoggedIn = function(req, res, next) {
+  if (!req.isAuthenticated()) {
+    return res.status(401).send({
+      message: 'User is not logged in'
+    });
+  }
+
+  next();
+};
+
+
+module.exports.logout = function (req, res) {
+  req.logout();
+  res.redirect('/');
+}

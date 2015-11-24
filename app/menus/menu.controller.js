@@ -29,6 +29,10 @@ var tmp_links = [
         url: '/user/login',
         display_name: 'login',
     },
+    {
+        url: '/user/logout',
+        display_name: 'logout',
+    },
 ];
 
 var logo = {

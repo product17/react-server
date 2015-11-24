@@ -109,19 +109,24 @@ module.exports = function(db) {
 
   	// Express MongoDB session storage
   	app.use(session({
-      genid: uuid.v1,
+      // genid: uuid.v1,
   		saveUninitialized: false,
       resave: false,
   		secret: config.sessionSecret,
       cookie: {
-        secure: true
+        secure: true,
+        maxAge: 2628000000,
       },
   		store: new mongoStore({
-  			// db: db.connection.db,
-        mongooseConnection: mongoose.connection,
-  			collection: config.sessionCollection
+        url: config.app.db_path,
   		})
   	}));
+    
+    // app.use(session({
+    //   secret: 'watwatwat',
+    //   resave: false,
+    //   saveUninitialized: false,
+    // }));
 
   	// use passport session
   	app.use(passport.initialize());

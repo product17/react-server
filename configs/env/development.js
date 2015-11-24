@@ -2,7 +2,8 @@
 
 module.exports = {
 	app: {
-		title: 'React Server'
+		title: 'React Server',
+		db_path: 'mongodb://localhost/react',
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',
