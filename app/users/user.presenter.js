@@ -61,6 +61,29 @@ module.exports.create = function (req, res) {
     })
 }
 
+// Render Edit page
+module.exports.edit = function (req, res) {
+
+}
+
+// View single user details
+module.exports.details = function (req, res, next) {
+  controller.details(req.params._id)
+    .then(function (user) {
+      res.render('index', {
+        reactContent: ReactDOM.renderToString(UserDetails({user: user})),
+        client_data: {
+          user: user,
+        },
+      });
+    })
+    .catch(function (err) {
+
+      // This should send the stack trace
+      next(err);
+    });
+}
+
 
 // Render All Users
 module.exports.list = function (req, res, next) {
@@ -81,23 +104,6 @@ module.exports.list = function (req, res, next) {
     });
 }
 
-
-module.exports.details = function (req, res, next) {
-  controller.details(req.params._id)
-    .then(function (user) {
-      res.render('index', {
-        reactContent: ReactDOM.renderToString(UserDetails({user: user})),
-        client_data: {
-          user: user,
-        },
-      });
-    })
-    .catch(function (err) {
-
-      // This should send the stack trace
-      next(err);
-    });
-}
 
 module.exports.login = function (req, res) {
   var form_schema = [
