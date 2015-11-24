@@ -107,3 +107,18 @@ module.exports.details = function (_id) {
       });
   });
 }
+
+/**
+ * Test that the user is logged in or not
+ */
+module.exports.isLoggedIn = function(req, res, next) {
+
+  console.log(req.session)
+	if (!req.isAuthenticated()) {
+		return res.status(401).send({
+			message: 'User is not logged in'
+		});
+	}
+
+	next();
+};

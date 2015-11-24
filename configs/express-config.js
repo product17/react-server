@@ -17,6 +17,7 @@ var fs = require('fs'),
   	passport = require('passport'),
     glob = require('glob'),
     uuid = require('uuid'),
+    mongoose = require('mongoose'),
   	mongoStore = require('connect-mongo')(session),
   	flash = require('connect-flash'),
   	config = require('./config'),
@@ -108,17 +109,18 @@ module.exports = function(db) {
 
   	// Express MongoDB session storage
   	app.use(session({
-      genuuid: uuid.v1,
-  		saveUninitialized: true,
-  		resave: true,
+      genid: uuid.v1,
+  		saveUninitialized: false,
+      resave: false,
   		secret: config.sessionSecret,
       cookie: {
         secure: true
       },
-  		// store: new mongoStore({
-  		// 	db: db.connection.db,
-  		// 	collection: config.sessionCollection
-  		// })
+  		store: new mongoStore({
+  			// db: db.connection.db,
+        mongooseConnection: mongoose.connection,
+  			collection: config.sessionCollection
+  		})
   	}));
 
   	// use passport session

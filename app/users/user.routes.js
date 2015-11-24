@@ -18,7 +18,7 @@ router.route('/new')
     .post(presenter.create);
 
 router.route('/details/:_id')
-    .get(presenter.details)
+    .get(controller.isLoggedIn, presenter.details)
 
 router.route('/login')
 	.get(presenter.login)

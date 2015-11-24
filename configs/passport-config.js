@@ -12,10 +12,10 @@ var passport 	= require('passport'),
  * Module init function.
  */
 module.exports = function() {
-  
+
 	// Serialize sessions
 	passport.serializeUser(function(user, done) {
-		done(null, user.id);
+		done(null, user._id);
 	});
 
 	// Deserialize sessions

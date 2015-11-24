@@ -1,6 +1,5 @@
 // @ifdef IS_NODE
-var UserListItem  = require('./user-list-item'),
-    React         = require('react'),
+var React         = require('react'),
     _             = require('lodash');
 // @endif
 
