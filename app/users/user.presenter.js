@@ -1,8 +1,5 @@
 'use strict';
 
-// Compiles the jsx for use on the server
-require('babel-core/register');
-
 var async     = require('async'),
     React     = require('react'),
     ReactDOM  = require('react-dom/server');
@@ -57,6 +54,7 @@ module.exports.create = function (req, res) {
     })
     .catch(function (err) {
       console.log(err);
+      req.flash('warning', 'Failed to create user');
       res.redirect('/');
     })
 }
@@ -64,6 +62,32 @@ module.exports.create = function (req, res) {
 // Render Edit page
 module.exports.edit = function (req, res) {
 
+  var form_schema = [
+    {name: 'first_name'},
+    {name: 'last_name'},
+    {name: 'email'},
+    {name: 'password'},
+    {
+      name: 'submit',
+      value: 'Create User',
+      field_class: 'btn btn-success pull-right',
+    },
+  ];
+
+  controller.details(req.params._id)
+    .then(function (user) {
+      var form_schema = controller.getFormSchema(form_schema);
+
+      res.render('index', {
+        reactContent: ReactDOM.renderToString(UserNew({form_schema: form_schema})),
+        client_data: {
+          form_schema
+        },
+      });
+    })
+    .catch(function (err) {
+
+    });
 }
 
 // View single user details
@@ -125,10 +149,17 @@ module.exports.login = function (req, res) {
 }
 
 
+module.exports.authenticateUser = function (req, res, next) {
+  console.log(req.body);
+
+  next();
+}
+
 /**
  * Test that the user is logged in or not
  */
 module.exports.isLoggedIn = function(req, res, next) {
+
   if (!req.isAuthenticated()) {
     return res.status(401).send({
       message: 'User is not logged in'

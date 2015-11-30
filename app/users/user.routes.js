@@ -19,10 +19,10 @@ router.route('/new')
     .post(/*presenter.isLoggedIn, */presenter.create);
 
 router.route('/details/:_id')
-    .get(presenter.isLoggedIn, function (req, res, next){
-        console.log('test');
-        next();
-    }, presenter.details)
+    .get(presenter.isLoggedIn, presenter.details);
+
+router.route('/edit/:_id')
+    .get(presenter.isLoggedIn, presenter.edit);
 
 router.route('/login')
     .get(presenter.login)

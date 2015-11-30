@@ -23,7 +23,6 @@ module.exports = function() {
 		User.findOne({
 			_id: id
 		}, {password: 0, salt: 0}, function(err, user) {
-			console.log(err, user);
 			done(err, user);
 		});
 	});
