@@ -9,6 +9,7 @@ var menu = require('./menu.presenter');
 // Route list
 router.use('/', menu.add_main_menu);
 router.use('/', menu.add_sap_menu);
+router.use('/', menu.add_footer_menu);
 
 
 // Export

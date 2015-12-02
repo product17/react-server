@@ -30,7 +30,7 @@ var MenuMain = React.createClass({
           </div>
 
           <div className='col-xs-3 topics'>
-            <h3 className='topic-label text-right'>{menu.topics.label}<span>[]</span></h3>
+            <h3 className='topic-label text-right'>{menu.topics.label} <i className='fa fa-bars'></i></h3>
           </div>
         </div>
       </nav>

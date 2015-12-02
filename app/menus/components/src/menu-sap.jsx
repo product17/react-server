@@ -18,17 +18,17 @@ var MenuSap = React.createClass({
       <nav className='navbar'>
         <div className='container'>
           <div className='col-xs-9'>
-            <a className='logo pull-left' href={menu.logo.url}>
+            <a className='logo pull-left' href={menu.logo.url} target='_blank'>
               <img src={menu.logo.img_url} alt={menu.logo.alt_text} />
             </a>
             <div className='pull-left learn-link'>
-              <h5>Concur is now part of SAP.</h5>
-              <a href='/test'>Learn more</a>
+              <h5>{menu.learn.label}</h5>
+              <a href={menu.learn.url} target='_blank'>{menu.learn.link_text} <i className='fa fa-chevron-right'></i></a>
             </div>
           </div>
 
           <div className='col-sm-3 about-link text-right'>
-            <a href='wat'>About SAP</a>
+            <a href={menu.about.url} target='_blank'>{menu.about.text} <i className='fa fa-chevron-right'></i></a>
           </div>
         </div>
       </nav>

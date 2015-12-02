@@ -28,11 +28,16 @@
 }
 #menu-main nav.navbar .breadcrumb-loc .current-loc {
 	color: #25AAFE;
+	cursor: default;
 }
 #menu-main nav.navbar .topics .topic-label {
 	margin: 0;
 	font-size: 20px;
 	line-height: 45px;
+	cursor: pointer;
+}
+#menu-main nav.navbar .topics .topic-label .fa {
+	font-size: 25px;
 }
 
 #menu-sap {
@@ -43,6 +48,9 @@
 	margin: 0;
 	padding-top: 5px;
 	padding-bottom: 5px;
+}
+#menu-sap nav.navbar a .fa {
+	font-size: 10px;
 }
 #menu-sap nav.navbar .learn-link {
 	margin-left: 10px;

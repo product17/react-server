@@ -13,10 +13,12 @@ var controller = require('./menu.controller');
 // Include Components
 var component_MenuMain = require('./components/build/menu-main');
 var component_MenuSap = require('./components/build/menu-sap');
+var component_MenuFooter = require('./components/build/menu-footer');
 
 // Setup Components
 var MenuMain = React.createFactory(component_MenuMain);
 var MenuSap = React.createFactory(component_MenuSap);
+var MenuFooter = React.createFactory(component_MenuFooter);
 
 
 
@@ -35,6 +37,16 @@ module.exports.add_sap_menu = function (req, res, next) {
     var menu = controller.sapMenu();
 
     res.locals.sapMenu = ReactDOM.renderToString(MenuSap({menu: menu}));
+
+    next();
+}
+
+
+module.exports.add_footer_menu = function (req, res, next) {
+
+    var menu = controller.footerMenu();
+
+    res.locals.footerMenu = ReactDOM.renderToString(MenuFooter({menu: menu}));
 
     next();
 }
