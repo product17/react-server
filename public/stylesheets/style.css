@@ -1,7 +1,27 @@
+#main-menu {
+	background-color: #004a7d;
+	color: #fff;
+}
+#main-menu a {
+	color: #fff;
+}
+#main-menu .nav > li > a:hover {
+	background-color: #0078C8;
+}
 nav.navbar {
 	border-radius: 0;
-	box-shadow: 0px 3px 5px rgba(0,0,0,0.1);
 }
 nav.navbar .logo {
 	padding: 7px;
+}
+
+.flush {
+	padding-right: 0;
+	padding-left: 0;
+}
+.flush-left {
+	padding-left: 0;
+}
+.flush-right {
+	padding-right: 0;
 }

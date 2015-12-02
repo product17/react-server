@@ -20,12 +20,13 @@ var app = express();
 app.set('views', path.join(__dirname, '../views'));
 
 // Use the top menu here
-app.use(menus_controller.add_top_menu);
+app.use(menus);
 
 // Set the root paths
 app.use('/', home);
 app.use('/articles', articles);
-app.use('/user', users);
+app.use('/admin/user', users.admin);
+app.use('/author', users.client);
 
 
 module.exports = app;

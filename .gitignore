@@ -3,6 +3,7 @@
 node_modules/
 build/
 public/javascripts/
+public/uploads/
 app/*/components/build
 *.pxm
 bower_components/

@@ -13,7 +13,7 @@ var UserList = React.createClass({
       <div className='well'>
         <h4>Name: {user.display_name}</h4>
         <p>Email: {user.email}</p>
-        <a href={'/user/details/' + user._id}>Details</a>
+        <a href={'/author/details/' + user._id}>Details</a>
       </div>
     );
   },

@@ -1,6 +1,7 @@
 'use strict';
 
 var async     = require('async'),
+    _         = require('lodash'),
     React     = require('react'),
     ReactDOM  = require('react-dom/server');
 
@@ -10,12 +11,14 @@ var controller = require('./user.controller');
 // Include Components
 var component_UserList    = require('./components/build/user-list'),
     component_UserNew     = require('./components/build/user-new'),
+    component_UserEdit    = require('./components/build/user-edit'),
     component_UserDetails = require('./components/build/user-details'),
     component_UserLogin   = require('./components/build/user-login');
 
 // Setup Components
 var UserList    = React.createFactory(component_UserList),
     UserNew     = React.createFactory(component_UserNew),
+    UserEdit    = React.createFactory(component_UserEdit),
     UserDetails = React.createFactory(component_UserDetails),
     UserLogin = React.createFactory(component_UserLogin);
 
@@ -36,6 +39,8 @@ module.exports.create_form = function (req, res) {
 
   var form_schema = controller.getFormSchema(form_schema);
 
+  form_schema.action = '/user/new';
+
   res.render('index', {
     reactContent: ReactDOM.renderToString(UserNew({form_schema: form_schema})),
     client_data: {
@@ -50,7 +55,7 @@ module.exports.create = function (req, res) {
   controller.create(req.body)
     .then(function (user) {
       console.log(user)
-      res.redirect('/user/details/' + user._id);
+      res.redirect('/author/details/' + user._id);
     })
     .catch(function (err) {
       console.log(err);
@@ -60,33 +65,52 @@ module.exports.create = function (req, res) {
 }
 
 // Render Edit page
-module.exports.edit = function (req, res) {
+module.exports.edit_form = function (req, res) {
 
-  var form_schema = [
+  var form_base = [
+    {
+      name: 'user_image',
+      elem: 'image',
+      override: true,
+    },
     {name: 'first_name'},
     {name: 'last_name'},
     {name: 'email'},
-    {name: 'password'},
+    {name: 'web_site'},
+    {name: 'twitter'},
+    {name: 'bio'},
     {
       name: 'submit',
-      value: 'Create User',
+      value: 'Save',
       field_class: 'btn btn-success pull-right',
     },
   ];
 
   controller.details(req.params._id)
     .then(function (user) {
-      var form_schema = controller.getFormSchema(form_schema);
+
+      var form_schema = controller.getFormSchema(form_base, user);
 
       res.render('index', {
-        reactContent: ReactDOM.renderToString(UserNew({form_schema: form_schema})),
+        reactContent: ReactDOM.renderToString(UserEdit({form_schema: form_schema})),
         client_data: {
           form_schema
         },
       });
     })
     .catch(function (err) {
+      console.log(err)
+    });
+}
 
+// Update User
+module.exports.edit = function (req, res) {
+  controller.update(req.params._id, req.body, req.file)
+    .then(function (user) {
+      res.redirect('/author/details/' + req.params._id);
+    })
+    .catch(function (err) {
+      console.log(err);
     });
 }
 

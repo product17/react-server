@@ -1,30 +1,66 @@
 'use strict';
 
-var express     = require('express'),
-    passport    = require('passport'),
-    router      = express.Router(),
-    path        = require('path');
+var express      = require('express'),
+    passport     = require('passport'),
+    adminRouter  = express.Router(),
+    clientRouter = express.Router(),
+    fs           = require('fs'),
+    mkdirp       = require('mkdirp'),
+    path         = require('path');
+
+var multer      = require('multer'),
+    storage     = multer.diskStorage({
+                    destination: function (req, file, next) {
+                        var dest = path.join('public/uploads/', file.fieldname);
+
+                        fs.exists(dest, function (exists) {
+                            if (!exists) {
+                                mkdirp(dest, function () {
+                                    next(null, dest);
+                                });
+                            } else {
+                                next(null, dest);
+                            }
+                        });
+                    },
+                    filename: function (req, file, next) {
+                        var formatName = file.originalname.replace(/W+/g, '-').toLowerCase();
+                        next(null, Date.now() + '-' + formatName);
+                    },
+                }),
+    upload      = multer({
+                    storage: storage,
+                    fileFilter: function (req, file, cb) {
+                        var accepted = ['image/png', 'image/jpg', 'image/jpeg'];
+                        if (accepted.indexOf(file.mimetype) >= 0) {
+                            cb(null, true);
+                        } else {
+                            cb(null, false);
+                        }
+                    },
+                });
 
 // Controller
 var presenter   = require('./user.presenter'),
     controller  = require('./user.controller');
 
-// Route list
-router.route('/')
+/**
+ * Admin Routes
+ * root: /admin/user/
+ */
+adminRouter.route('/')
     .get(presenter.list);
 
-router.route('/new')
+adminRouter.route('/new')
     // Uncomment for production to prevent random people from making accounts
     .get(/*presenter.isLoggedIn, */presenter.create_form)
     .post(/*presenter.isLoggedIn, */presenter.create);
 
-router.route('/details/:_id')
-    .get(presenter.isLoggedIn, presenter.details);
+adminRouter.route('/edit/:_id')
+    .get(presenter.isLoggedIn, presenter.edit_form)
+    .post(presenter.isLoggedIn, upload.single('user_image'), presenter.edit);
 
-router.route('/edit/:_id')
-    .get(presenter.isLoggedIn, presenter.edit);
-
-router.route('/login')
+adminRouter.route('/login')
     .get(presenter.login)
     .post(passport.authenticate('local', {
         successRedirect: '/user',
@@ -32,8 +68,18 @@ router.route('/login')
         failureFlash: 'Incorrect username or password.'
     }));
 
-router.route('/logout')
+adminRouter.route('/logout')
     .get(presenter.logout);
 
+
+/**
+ * Client Routes
+ * root: /author/
+ */
+clientRouter.route('/details/:_id')
+    .get(presenter.isLoggedIn, presenter.details);
+
+
 // Export
-module.exports = router;
+module.exports.admin = adminRouter;
+module.exports.client = clientRouter;

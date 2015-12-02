@@ -3,25 +3,26 @@
 /**
  * Module dependencies.
  */
-var fs = require('fs'),
-  	http = require('http'),
-  	https = require('https'),
-  	express = require('express'),
-  	morgan = require('morgan'),
-  	bodyParser = require('body-parser'),
-  	session = require('express-session'),
-  	compress = require('compression'),
+var fs             = require('fs'),
+  	http           = require('http'),
+  	https          = require('https'),
+  	express        = require('express'),
+  	morgan         = require('morgan'),
+  	bodyParser     = require('body-parser'),
+  	session        = require('express-session'),
+  	compress       = require('compression'),
   	methodOverride = require('method-override'),
-  	cookieParser = require('cookie-parser'),
-  	helmet = require('helmet'),
-  	passport = require('passport'),
-    glob = require('glob'),
-    uuid = require('uuid'),
-    mongoose = require('mongoose'),
-  	mongoStore = require('connect-mongo')(session),
-  	flash = require('connect-flash'),
-  	config = require('./config'),
-  	path = require('path');
+  	cookieParser   = require('cookie-parser'),
+  	helmet         = require('helmet'),
+  	passport       = require('passport'),
+    glob           = require('glob'),
+    uuid           = require('uuid'),
+    multer         = require('multer'),
+    mongoose       = require('mongoose'),
+  	mongoStore     = require('connect-mongo')(session),
+  	flash          = require('connect-flash'),
+  	config         = require('./config'),
+  	path           = require('path');
 
     /**
      * Normalize a port into a number, string, or false.

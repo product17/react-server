@@ -16,6 +16,7 @@ var TopMenu = React.createClass({
   render: function() {
     var links = this.state.links ? this.state.links : this.props.links;
     var logo = this.state.logo ? this.state.logo : this.props.logo;
+    var user = this.state.user ? this.state.user : this.props.user;
 
     var link_list = _.map(links, function (item, i) {
       return <TopLink key={i} link={item} />
@@ -30,6 +31,7 @@ var TopMenu = React.createClass({
           <ul className='nav navbar-nav'>
             {link_list}
           </ul>
+          <p>{user.display_name}</p>
         </div>
       </nav>
     );

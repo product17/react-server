@@ -1,15 +1,13 @@
 'use strict';
 
 var express = require('express'),
-    router  = express.Router(),
-    path    = require('path');
+    router  = express.Router();
 
 // Controller
-var menu = require('./menu.controller');
+var menu = require('./menu.presenter');
 
 // Route list
-router.route('/')
-    .get(menu.index);
+router.use('/', menu.add_top_menu);
 
 
 // Export

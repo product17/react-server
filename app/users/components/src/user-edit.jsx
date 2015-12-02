@@ -4,7 +4,7 @@ var React     = require('react'),
     FormField = require('../../../forms/components/build/form-field');
 // @endif
 
-var UserNew = React.createClass({
+var UserEdit = React.createClass({
   getInitialState: function () {
     return {};
   },
@@ -18,7 +18,7 @@ var UserNew = React.createClass({
 
     return (
       <div className='col-sm-6 col-sm-offset-3'>
-        <form method='post'>
+        <form method='post' encType="multipart/form-data">
           {fields}
         </form>
       </div>
@@ -28,5 +28,5 @@ var UserNew = React.createClass({
 
 
 // @ifdef IS_NODE
-module.exports = UserNew;
+module.exports = UserEdit;
 // @endif

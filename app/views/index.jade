@@ -2,11 +2,11 @@ doctype
 html
   head
     title React Server Side Rendering Example
-    link(href='/public/stylesheets/style.css', rel='stylesheet')
     link(href='/public/stylesheets/bootstrap.min.css', rel='stylesheet')
     link(href='/public/stylesheets/bootstrap-theme.min.css', rel='stylesheet')
+    link(href='/public/stylesheets/style.css', rel='stylesheet')
   body
-    div(id='react-menu')!= reactMenu
+    div(id='main-menu')!= reactMenu
     section(id='react-root', class='container')!= reactContent
 
     script(src='https://fb.me/react-0.14.0.js')

@@ -2,6 +2,7 @@
 
 var _           = require('lodash'),
     Promise     = require('bluebird'),
+    path        = require('path'),
     formHelper  = require('../forms').helper,
     mongoose    = require('mongoose'),
     User        = mongoose.model('User');
@@ -9,10 +10,25 @@ var _           = require('lodash'),
 
 
 // This is a syncronous function, it has no database hits
-module.exports.getFormSchema = function (field_list) {
+module.exports.getFormSchema = function (field_list, data) {
   var schema  = User.schema.tree;
+  data = data || {};
+
+  // Map the current data values
+  field_list = _.map(field_list, function (item, i) {
+    if (data[item.name]) {
+      item.value = data[item.name];
+      return item;
+    }
+
+    return item;
+  });
 
   var list = _.map(field_list, function (item, key) {
+
+    if (item.override === true) {
+      return item;
+    }
 
     if (item.name === 'submit') {
       item.elem = 'submit';
@@ -65,6 +81,44 @@ module.exports.create = function (user_data) {
     });
   });
 }
+
+
+module.exports.update = function (_id, user_data, file) {
+  
+  // Add the file if it exists
+  if (file) {
+    user_data.user_image = {};
+    user_data.user_image.link = file.path;
+  }
+
+  return new Promise(function (resolve, reject) {
+    User.findOne({_id: _id}, function (err, user) {
+
+      if (err) {
+        reject(err);
+      } else {
+
+        _.extend(user, user_data);
+
+        user.save(function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(user);
+          }
+        });
+      }
+    });
+    // User.findOneAndUpdate({_id: _id}, {$set: user_data}, function (err, user) {
+    //   if (err) {
+    //     reject(err);
+    //   } else {
+    //     resolve(user);
+    //   }
+    // });
+  });
+}
+
 
 /**
  * Get a paginated list of users
