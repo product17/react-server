@@ -7,7 +7,8 @@ var express = require('express'),
 var menu = require('./menu.presenter');
 
 // Route list
-router.use('/', menu.add_top_menu);
+router.use('/', menu.add_main_menu);
+router.use('/', menu.add_sap_menu);
 
 
 // Export

@@ -1,19 +1,73 @@
-#main-menu {
+#menu-main {
 	background-color: #004a7d;
 	color: #fff;
 }
-#main-menu a {
+#menu-main a {
 	color: #fff;
 }
-#main-menu .nav > li > a:hover {
+#menu-main .nav > li > a:hover {
 	background-color: #0078C8;
 }
-nav.navbar {
+#menu-main nav.navbar {
+	min-height: 70px;
 	border-radius: 0;
 }
-nav.navbar .logo {
-	padding: 7px;
+#menu-main nav.navbar .container {
+	margin-top: 10px;
 }
+#menu-main nav.navbar .logo {
+	position: absolute;
+	padding: 7px 0;
+}
+#menu-main nav.navbar .breadcrumb-loc {
+	margin: 0;
+	font-size: 25px;
+	line-height: 45px;
+	font-weight: 400;
+	letter-spacing: 1px;
+}
+#menu-main nav.navbar .breadcrumb-loc .current-loc {
+	color: #25AAFE;
+}
+#menu-main nav.navbar .topics .topic-label {
+	margin: 0;
+	font-size: 20px;
+	line-height: 45px;
+}
+
+#menu-sap {
+	background-color: #F1AD00;
+}
+#menu-sap nav.navbar {
+	min-height: 40px;
+	margin: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+#menu-sap nav.navbar .learn-link {
+	margin-left: 10px;
+}
+#menu-sap nav.navbar .learn-link h5 {
+	margin: 0 0 -3px 0;
+}
+#menu-sap nav.navbar .learn-link a {
+	font-size: 12px;
+	font-weight: 700;
+	color: #000;
+}
+#menu-sap nav.navbar .about-link {
+	padding-top: 12px;
+}
+#menu-sap nav.navbar .about-link a {
+	color: #000;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+a:focus {
+	text-decoration: none;
+}
+
 
 .flush {
 	padding-right: 0;

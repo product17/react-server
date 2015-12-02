@@ -7,49 +7,43 @@ var async     = require('async'),
     React     = require('react'),
     ReactDOM  = require('react-dom/server');
 
+// Include the Controller
+var controller = require('./menu.controller');
+
 // Include Components
-var component_TopMenu = require('./components/build/top-menu');
+var component_MenuMain = require('./components/build/menu-main');
+var component_MenuSap = require('./components/build/menu-sap');
 
 // Setup Components
-var TopMenu = React.createFactory(component_TopMenu.TopMenu);
+var MenuMain = React.createFactory(component_MenuMain);
+var MenuSap = React.createFactory(component_MenuSap);
 
 
 
-// Temporary
-var tmp_links = [
-    {
-        url: '/',
-        display_name: 'home',
-    },
-    {
-        url: '/about',
-        display_name: 'about',
-    },
-    {
-        url: '/admin/user/login',
-        display_name: 'login',
-    },
-    {
-        url: '/admin/user/logout',
-        display_name: 'logout',
-    },
-];
+module.exports.add_main_menu = function (req, res, next) {
 
-var logo = {
-    url: '/public/images/concur_logo.png',
-}
+    var menu = controller.mainMenu('wat');
 
-module.exports.add_top_menu = function (req, res, next) {
-
-    res.locals.reactMenu = ReactDOM.renderToString(TopMenu({links: tmp_links, logo: logo, user: req.user || {}}));
+    res.locals.mainMenu = ReactDOM.renderToString(MenuMain({menu: menu}));
 
     next();
 }
 
+
+module.exports.add_sap_menu = function (req, res, next) {
+
+    var menu = controller.sapMenu();
+
+    res.locals.sapMenu = ReactDOM.renderToString(MenuSap({menu: menu}));
+
+    next();
+}
+
+
 // Home page render
 module.exports.index = function (req, res) {
     res.render('index', {
-        reactContent: ReactDOM.renderToString(TopMenu({links: tmp_links, logo: logo})),
+        reactContent: ReactDOM.renderToString(MenuMain({links: tmp_links, logo: logo})),
         client_menu_data: {
             link_list: tmp_links,
             logo: logo,
