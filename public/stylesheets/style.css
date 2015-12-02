@@ -1,89 +1,176 @@
 #menu-main {
-	background-color: #004a7d;
-	color: #fff;
+    background-color: #004a7d;
+    color: #fff;
 }
 #menu-main a {
-	color: #fff;
+    color: #fff;
 }
 #menu-main .nav > li > a:hover {
-	background-color: #0078C8;
+    background-color: #0078C8;
 }
 #menu-main nav.navbar {
-	min-height: 70px;
-	border-radius: 0;
+    min-height: 70px;
+    border-radius: 0;
 }
 #menu-main nav.navbar .container {
-	margin-top: 10px;
+    margin-top: 10px;
 }
 #menu-main nav.navbar .logo {
-	position: absolute;
-	padding: 7px 0;
+    position: absolute;
+    padding: 7px 0;
 }
 #menu-main nav.navbar .breadcrumb-loc {
-	margin: 0;
-	font-size: 25px;
-	line-height: 45px;
-	font-weight: 400;
-	letter-spacing: 1px;
+    margin: 0;
+    font-size: 25px;
+    line-height: 45px;
+    font-weight: 400;
+    letter-spacing: 1px;
 }
 #menu-main nav.navbar .breadcrumb-loc .current-loc {
-	color: #25AAFE;
-	cursor: default;
+    color: #25AAFE;
+    cursor: default;
 }
 #menu-main nav.navbar .topics .topic-label {
-	margin: 0;
-	font-size: 20px;
-	line-height: 45px;
-	cursor: pointer;
+    margin: 0;
+    font-size: 20px;
+    line-height: 45px;
+    cursor: pointer;
 }
 #menu-main nav.navbar .topics .topic-label .fa {
-	font-size: 25px;
+    font-size: 25px;
 }
 
 #menu-sap {
-	background-color: #F1AD00;
+    background-color: #F1AD00;
 }
 #menu-sap nav.navbar {
-	min-height: 40px;
-	margin: 0;
-	padding-top: 5px;
-	padding-bottom: 5px;
+    min-height: 40px;
+    margin: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 #menu-sap nav.navbar a .fa {
-	font-size: 10px;
+    font-size: 10px;
 }
 #menu-sap nav.navbar .learn-link {
-	margin-left: 10px;
+    margin-left: 10px;
 }
 #menu-sap nav.navbar .learn-link h5 {
-	margin: 0 0 -3px 0;
+    margin: 0 0 -3px 0;
 }
 #menu-sap nav.navbar .learn-link a {
-	font-size: 12px;
-	font-weight: 700;
-	color: #000;
+    font-size: 12px;
+    font-weight: 700;
+    color: #000;
 }
 #menu-sap nav.navbar .about-link {
-	padding-top: 12px;
+    padding-top: 12px;
 }
 #menu-sap nav.navbar .about-link a {
-	color: #000;
-	font-size: 12px;
-	font-weight: 700;
+    color: #000;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+#menu-footer {
+    padding-bottom: 20px;
+    background-color: #111;
+}
+#menu-footer nav.navbar {
+    margin: 0;
+}
+#menu-footer nav.navbar ul {
+    list-style: none;
+    padding: 0;
+    clear: both;
+}
+#menu-footer nav.navbar ul li {
+    float: left;
+}
+#menu-footer nav.navbar .footer-social ul li a:first-child {
+    margin-left: 0;
+}
+#menu-footer nav.navbar .footer-social ul li a {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 15px;
+    background-color: #262626;
+    color: #A8A8A8;
+    line-height: 40px;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 50%;
+    -webkit-transition: all 0.25s ease-in-out;
+       -moz-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+}
+#menu-footer nav.navbar .footer-social ul li a:hover {
+    color: #fff;
+}
+#menu-footer nav.navbar .footer-social ul li a.facebook:hover {
+    background-color: #0078C9;
+}
+#menu-footer nav.navbar .footer-social ul li a.twitter:hover {
+    background-color: #00A9F2;
+}
+#menu-footer nav.navbar .footer-social ul li a.linkedin:hover {
+    background-color: #004A7D;
+}
+#menu-footer nav.navbar .footer-social ul li a.google-plus:hover {
+    background-color: #D25533;
+}
+
+#menu-footer nav.navbar .footer-info ul li:first-child {
+    margin-left: 0;
+}
+#menu-footer nav.navbar .footer-info ul li {
+    margin: 8px;
+    font-weight: 500;
+}
+#menu-footer nav.navbar a {
+    font-size: 13px;
+    color: #A8A8A8;
+    -webkit-transition: all 0.25s ease-in-out;
+       -moz-transition: all 0.25s ease-in-out;
+            transition: all 0.25s ease-in-out;
+}
+#menu-footer nav.navbar a:hover {
+    color: #009af2;
+    text-decoration: none;
+}
+
+#menu-footer nav.navbar p.footer-copyright,
+#menu-footer nav.navbar p.footer-copyright a {
+    clear: both;
+    color: #777;
+    font-size: 12px;
+}
+#menu-footer nav.navbar p.footer-copyright a:hover {
+    text-decoration: none;
+    color: #009af2;
+}
+
+#menu-footer nav.navbar .footer-country-selector {
+    padding-top: 88px;
+}
+#menu-footer nav.navbar .footer-country-selector a {
+    font-size: 13px;
+    font-weight: 500;
 }
 
 a:focus {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 
 .flush {
-	padding-right: 0;
-	padding-left: 0;
+    padding-right: 0;
+    padding-left: 0;
 }
 .flush-left {
-	padding-left: 0;
+    padding-left: 0;
 }
 .flush-right {
-	padding-right: 0;
+    padding-right: 0;
 }

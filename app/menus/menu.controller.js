@@ -65,6 +65,22 @@ module.exports.footerMenu = function (lang) {
 
     var menu = {
         social: [
+            {
+                network: 'facebook',
+                url: 'https://www.facebook.com/Concur',
+            },
+            {
+                network: 'twitter',
+                url: 'https://twitter.com/Concur',
+            },
+            {
+                network: 'linkedin',
+                url: 'https://www.linkedin.com/groups/149969/profile',
+            },
+            {
+                network: 'google-plus',
+                url: 'https://plus.google.com/+concur/posts',
+            },
         ],
         info_links: [
             {
@@ -84,6 +100,9 @@ module.exports.footerMenu = function (lang) {
             text: '© Copyright 2015 Concur Technologies, Inc. All rights reserved.',
             link_text: 'Privacy Policy',
             url: 'https://www.concur.com/en-us/privacy-policy',
+        },
+        country_selector: {
+            text: 'COUNTRY SELECTOR',
         },
     };
 
