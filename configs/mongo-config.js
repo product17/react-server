@@ -4,13 +4,13 @@ var env = process.env.NODE_ENV;
 
 var config = {
   development: {
-    db_path: 'mongodb://localhost/react',
+    db_path: 'mongodb://localhost/newsroom',
   },
   production: {
-    db_path: 'mongodb://localhost/react',
+    db_path: 'mongodb://localhost/newsroom',
   }
 }
 
-module.exports = function () {
+module.exports.wat = function () {
   return config[env];
 };

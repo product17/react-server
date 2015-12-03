@@ -34,7 +34,7 @@ var FormImage = React.createClass({
         {renderImage}
         <div className={field_info.wrapper_class + imageClass}>
           <label for={field_info.name}>{label}</label>
-          <input name={field_info.name} className={field_info.field_class} type="file" value={field_info.value} placeholder={label} />
+          <input name={field_info.name} className={field_info.field_class} type="file" value='' placeholder={label} />
         </div>
         <div className='clearfix'></div>
       </div>

@@ -93,6 +93,9 @@ module.exports.update = function (_id, user_data, file) {
     procImage.processUserImage(file)
         .then(function (image) {
           console.log(image);
+        })
+        .catch(function (err) {
+          console.log(err);
         });
   }
 
@@ -114,13 +117,6 @@ module.exports.update = function (_id, user_data, file) {
         });
       }
     });
-    // User.findOneAndUpdate({_id: _id}, {$set: user_data}, function (err, user) {
-    //   if (err) {
-    //     reject(err);
-    //   } else {
-    //     resolve(user);
-    //   }
-    // });
   });
 }
 

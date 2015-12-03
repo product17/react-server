@@ -4,6 +4,7 @@ var express      = require('express'),
     passport     = require('passport'),
     adminRouter  = express.Router(),
     clientRouter = express.Router(),
+    loginRouter  = express.Router(),
     fs           = require('fs'),
     mkdirp       = require('mkdirp'),
     path         = require('path');
@@ -44,6 +45,19 @@ var multer      = require('multer'),
 var presenter   = require('./user.presenter'),
     controller  = require('./user.controller');
 
+
+/**
+ * Login Routes
+ * root: /login/
+ */
+loginRouter.route('/')
+    .get(presenter.login)
+    .post(passport.authenticate('local', {
+        successRedirect: '/admin/user',
+        failureRedirect: '/login',
+        failureFlash: 'Incorrect username or password.'
+    }));
+
 /**
  * Admin Routes
  * root: /admin/user/
@@ -60,14 +74,6 @@ adminRouter.route('/edit/:_id')
     .get(presenter.isLoggedIn, presenter.edit_form)
     .post(presenter.isLoggedIn, upload.single('user_image'), presenter.edit);
 
-adminRouter.route('/login')
-    .get(presenter.login)
-    .post(passport.authenticate('local', {
-        successRedirect: '/user',
-        failureRedirect: '/user/login',
-        failureFlash: 'Incorrect username or password.'
-    }));
-
 adminRouter.route('/logout')
     .get(presenter.logout);
 
@@ -77,9 +83,10 @@ adminRouter.route('/logout')
  * root: /author/
  */
 clientRouter.route('/details/:_id')
-    .get(presenter.isLoggedIn, presenter.details);
+    .get(presenter.details);
 
 
 // Export
 module.exports.admin = adminRouter;
 module.exports.client = clientRouter;
+module.exports.login = loginRouter;

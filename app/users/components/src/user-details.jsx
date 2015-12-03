@@ -21,13 +21,22 @@ var UserList = React.createClass({
     return false;
   },
 
+  renderImage: function () {
+    if (user.user_image.link) {
+      return (
+        <img className='img-circle img-responsive text-center' alt='user image' src={'/' + user.user_image.link} />
+      );
+    } else {
+      return false;
+    }
+  },
+
   render: function() {
     var user = this.state.user ? this.state.user : this.props.user;
 
-
     return (
       <div className='col-sm-6 col-sm-offset-3 text-center'>
-        <img className='img-circle img-responsive text-center' alt='user image' src={'/' + user.user_image.link} />
+        {renderImage()}
         <h4>{user.display_name}</h4>
         {this.fieldRender('bio')}
         <a href={'mailto:' + user.email}>{user.email}</a>

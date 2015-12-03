@@ -35,10 +35,12 @@ app.use('/admin', function(req, res, next) {
 });
 
 // Set the root paths
-app.use('/', home);
+
 app.use('/articles', articles);
+app.use('/login', users.login);
 app.use('/admin/user', users.admin);
 app.use('/author', users.client);
+app.use('/', home);
 
 
 module.exports = app;

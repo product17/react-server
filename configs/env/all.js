@@ -2,7 +2,7 @@
 
 module.exports = {
 	app: {
-		title: 'React Server',
+		title: 'Concur Newsroom',
 		description: 'Full-Stack JavaScript with MongoDB, Express, ReactJS, and Node.js',
 		keywords: 'MongoDB, Express, ReactJS, Node.js'
 	},

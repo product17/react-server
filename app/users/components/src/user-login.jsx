@@ -19,7 +19,7 @@ var UserNew = React.createClass({
     return (
       <div className='col-sm-6 col-sm-offset-3'>
         <h4>Login</h4>
-        <form action='/user/login' method='post'>
+        <form method='post'>
           {fields}
         </form>
       </div>

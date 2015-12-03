@@ -114,7 +114,7 @@ module.exports = function(db) {
       resave: false,
   		secret: config.sessionSecret,
       cookie: {
-        secure: 'auto',
+        secure: false,
         maxAge: 2628000000,
       },
   		store: new mongoStore({
