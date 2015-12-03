@@ -5,7 +5,8 @@ var _           = require('lodash'),
     path        = require('path'),
     formHelper  = require('../forms').helper,
     mongoose    = require('mongoose'),
-    User        = mongoose.model('User');
+    User        = mongoose.model('User'),
+    procImage   = require(path.join(__libs, 'process-image'));
 
 
 
@@ -89,6 +90,10 @@ module.exports.update = function (_id, user_data, file) {
   if (file) {
     user_data.user_image = {};
     user_data.user_image.link = file.path;
+    procImage.processUserImage(file)
+        .then(function (image) {
+          console.log(image);
+        });
   }
 
   return new Promise(function (resolve, reject) {

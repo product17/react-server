@@ -1,4 +1,5 @@
 var path          = require('path'),
+    libs_path     = require('./libs/libs-path')(),
     favicon       = require('serve-favicon'),
     cookieParser  = require('cookie-parser'),
     bodyParser    = require('body-parser'),

@@ -22,6 +22,18 @@ app.set('views', path.join(__dirname, '../views'));
 // Use the top menu here
 app.use(menus);
 
+// Security mask
+app.use('/admin', function(req, res, next) {
+
+  if (!req.isAuthenticated()) {
+    return res.status(401).send({
+      message: 'User is not logged in'
+    });
+  }
+
+  next();
+});
+
 // Set the root paths
 app.use('/', home);
 app.use('/articles', articles);

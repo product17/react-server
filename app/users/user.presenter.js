@@ -173,12 +173,6 @@ module.exports.login = function (req, res) {
 }
 
 
-module.exports.authenticateUser = function (req, res, next) {
-  console.log(req.body);
-
-  next();
-}
-
 /**
  * Test that the user is logged in or not
  */

@@ -5,6 +5,8 @@
  */
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
+	path = require('path'),
+	regionInfo = require(path.join(__libs, 'regional-codes')),
 	crypto = require('crypto');
 
 /**
@@ -88,10 +90,18 @@ var UserSchema = new Schema({
 		},
 	},
 	user_image: {
-		link: String,
-		large_link: String,
-		medium_link: String,
-		small_link: String,
+		type: {
+			link: String,
+			large_link: String,
+			medium_link: String,
+			small_link: String,
+		}
+	},
+	country_code: {
+		type: [{
+			type: String,
+			enum: regionInfo.listCountries(),
+		}],
 	},
 	salt: {
 		type: String

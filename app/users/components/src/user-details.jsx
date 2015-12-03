@@ -28,11 +28,11 @@ var UserList = React.createClass({
     return (
       <div className='col-sm-6 col-sm-offset-3 text-center'>
         <img className='img-circle img-responsive text-center' alt='user image' src={'/' + user.user_image.link} />
-        <h4>Name: {user.display_name}</h4>
-        <p>Email: {user.email}</p>
+        <h4>{user.display_name}</h4>
+        {this.fieldRender('bio')}
+        <a href={'mailto:' + user.email}>{user.email}</a>
         {this.fieldRender('web_site')}
         {this.fieldRender('twitter')}
-        {this.fieldRender('bio')}
       </div>
     );
   },
