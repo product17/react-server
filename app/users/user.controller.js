@@ -1,6 +1,7 @@
 'use strict';
 
 var _           = require('lodash'),
+    async       = require('async'),
     Promise     = require('bluebird'),
     path        = require('path'),
     formHelper  = require('../forms').helper,
@@ -85,19 +86,6 @@ module.exports.create = function (user_data) {
 
 
 module.exports.update = function (_id, user_data, file) {
-  
-  // Add the file if it exists
-  if (file) {
-    user_data.user_image = {};
-    user_data.user_image.link = file.path;
-    procImage.processUserImage(file)
-        .then(function (image) {
-          console.log(image);
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
-  }
 
   return new Promise(function (resolve, reject) {
     User.findOne({_id: _id}, function (err, user) {
@@ -106,15 +94,36 @@ module.exports.update = function (_id, user_data, file) {
         reject(err);
       } else {
 
-        _.extend(user, user_data);
+        if (file) {
+          user_data.user_image = {};
+          user_data.user_image.link = file.path;
+          procImage.processUserImage(file)
+              .then(function (image) {
+                  _.extend(user, user_data);
+                  _.extend(user.user_image, image);
 
-        user.save(function (err) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(user);
-          }
-        });
+                  user.save(function (err) {
+                    if (err) {
+                      reject(err);
+                    } else {
+                      resolve(user);
+                    }
+                  });
+              })
+              .catch(function (err) {
+                console.log(err);
+              });
+        } else {
+          _.extend(user, user_data);
+
+          user.save(function (err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(user);
+            }
+          });
+        }
       }
     });
   });
@@ -126,20 +135,31 @@ module.exports.update = function (_id, user_data, file) {
  * ToDo: add Pagination...
  * @return {Promise} Returns a Promise to handle the async DB call
  */
-module.exports.list = function () {
+module.exports.list = function (page) {
   return new Promise(function (resolve, reject) {
 
-    // Exclude password and salt for security
-    User.find({}, {password: 0, salt: 0})
-      .sort({'created': -1})
-      .limit(20)
-      .exec(function (err, data) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(data);
-        }
-      });
+    async.parallel([
+      function (done) {
+        User.find({}, {password: 0, salt: 0})
+            .skip((page * 1) * 10)
+            .sort({'created': -1})
+            .limit(10)
+            .exec(done);
+          },
+      function (done) {
+        User.count({}, done);
+      },
+    ], function (err, results) {
+      if (err || results[0].length <= 0) {
+        reject(err || new Error('404::No Content'));
+      } else {
+        resolve({
+          data: results[0],
+          count: results[1],
+        });
+      }
+    })
+    
   });
 }
 

@@ -21,10 +21,11 @@ var UserList = React.createClass({
     return false;
   },
 
-  renderImage: function () {
-    if (user.user_image.link) {
+  renderImage: function (user) {
+    console.log(user)
+    if (user.user_image && user.user_image.small) {
       return (
-        <img className='img-circle img-responsive text-center' alt='user image' src={'/' + user.user_image.link} />
+        <img className='img-circle img-responsive img-center' alt='user image' src={'/' + user.user_image.small} />
       );
     } else {
       return false;
@@ -36,7 +37,7 @@ var UserList = React.createClass({
 
     return (
       <div className='col-sm-6 col-sm-offset-3 text-center'>
-        {renderImage()}
+        {this.renderImage(user)}
         <h4>{user.display_name}</h4>
         {this.fieldRender('bio')}
         <a href={'mailto:' + user.email}>{user.email}</a>

@@ -161,7 +161,9 @@ a:focus {
     text-decoration: none;
 }
 
-
+.img-center {
+    margin: 0 auto;
+}
 .flush {
     padding-right: 0;
     padding-left: 0;

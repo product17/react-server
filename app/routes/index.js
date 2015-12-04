@@ -23,16 +23,16 @@ app.set('views', path.join(__dirname, '../views'));
 app.use(menus);
 
 // Security mask
-app.use('/admin', function(req, res, next) {
+// app.use('/admin', function(req, res, next) {
 
-  if (!req.isAuthenticated()) {
-    return res.status(401).send({
-      message: 'User is not logged in'
-    });
-  }
+//   if (!req.isAuthenticated()) {
+//     return res.status(401).send({
+//       message: 'User is not logged in'
+//     });
+//   }
 
-  next();
-});
+//   next();
+// });
 
 // Set the root paths
 

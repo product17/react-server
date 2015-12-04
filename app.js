@@ -5,10 +5,11 @@ var path          = require('path'),
     bodyParser    = require('body-parser'),
     helmet        = require('helmet'),
     chalk         = require('chalk'),
+    config        = require('./configs/env/' + process.env.NODE_ENV),
     mongoose      = require('mongoose');
 
 // Setup Database connection
-var db = mongoose.connect('mongodb://localhost/react', function (err) {
+var db = mongoose.connect(config.app.db_path, function (err) {
   if (err) {
     console.error(chalk.red('Could not connect to MongoDB!'));
 	console.log(chalk.red(err));

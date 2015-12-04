@@ -136,12 +136,16 @@ module.exports.details = function (req, res, next) {
 // Render All Users
 module.exports.list = function (req, res, next) {
 
-  controller.list()
+  // ParseInt to prevent random strings from breaking everything
+  var page = parseInt(req.query.p) || 0;
+  
+  controller.list(page)
     .then(function (list) {
       res.render('index', {
-        reactContent: ReactDOM.renderToString(UserList({user_list: list})),
+        reactContent: ReactDOM.renderToString(UserList({user_list: list, current_page: page})),
         client_data: {
           user_list: list,
+          current_page: page,
         },
       });
     })

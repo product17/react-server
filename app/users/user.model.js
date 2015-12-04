@@ -92,10 +92,9 @@ var UserSchema = new Schema({
 	user_image: {
 		type: {
 			link: String,
-			large_link: String,
-			medium_link: String,
-			small_link: String,
-		}
+			small: String,
+			x_small: String,
+		},
 	},
 	country_code: {
 		type: [{
@@ -109,7 +108,7 @@ var UserSchema = new Schema({
 	provider: {
 		type: String,
 		default: 'local',
-		required: 'Provider is required'
+		required: 'Provider is required',
 	},
 	providerData: {},
 	additionalProvidersData: {},
@@ -118,22 +117,22 @@ var UserSchema = new Schema({
 			type: String,
 			enum: ['author', 'admin', 'dev']
 		}],
-		default: ['author']
+		default: ['author'],
 	},
 	updated: {
 		type: Date
 	},
 	created: {
 		type: Date,
-		default: Date.now
+		default: Date.now,
 	},
 	/* For reset password */
 	resetPasswordToken: {
-		type: String
+		type: String,
 	},
 	resetPasswordExpires: {
-		type: Date
-	}
+		type: Date,
+	},
 });
 
 /**
