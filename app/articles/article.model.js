@@ -78,6 +78,12 @@ var ArticleSchema = new Schema({
             max: 1,
         }
     },
+    opengraph: {
+        type: String
+    },
+    google_plus: {
+        type: String
+    },
     redirect: {
         type: String,
     },
