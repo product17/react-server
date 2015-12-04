@@ -27,6 +27,11 @@ var ArticleSchema = new Schema({
         default: '',
         trim: true
     },
+    category: {
+        type: String,
+        default: '',
+        trim: true
+    }
     tags: [{
         type: String,
     }],
@@ -38,7 +43,14 @@ var ArticleSchema = new Schema({
         custom_title: {
             type: String,
             default: ''
-        }
+        },
+        meta_description: {
+            type: String,
+            default: ''
+        },
+        meta_keywords: [{
+            type: String
+        }],
         robots: {
             noarchive: {
                 type: Boolean,
