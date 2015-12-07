@@ -9,12 +9,15 @@ var UserList = React.createClass({
   },
 
   renderUser: function (user, key) {
+    console.log(user.user_image)
     return (
       <div className='well'>
+        <img className='pull-left' src={'/' + ((user.user_image && user.user_image.small) || 'public/images/default-user.gif')} />
         <h4>Name: {user.display_name}</h4>
         <p>Email: {user.email}</p>
         <a href={'/author/details/' + user._id} className='btn btn-primary'>Details</a>
         <a href={'/admin/user/edit/' + user._id} className='btn btn-success'>Edit</a>
+        <div className='clearfix'></div>
       </div>
     );
   },
@@ -22,7 +25,7 @@ var UserList = React.createClass({
   renderPageLink: function (page, active) {
     return (
       <li key={page} className={active}>
-        <a href={'?p=' + page}>{page}</a>
+        <a href={'?p=' + page}>{page + 1}</a>
       </li>
     );
   },
@@ -66,7 +69,7 @@ var UserList = React.createClass({
     var users = _.map(user_list.data, this.renderUser);
 
     return (
-      <div className='col-sm-6 col-sm-offset-3'>
+      <div className='col-sm-6 col-sm-offset-3 user-list'>
         {users}
         {this.renderPagination(current_page, user_list.count, user_list.data.length)}
       </div>

@@ -5,6 +5,7 @@ build/
 public/javascripts/
 public/uploads/
 app/*/components/build
+z_images/*
 *.pxm
 bower_components/
 

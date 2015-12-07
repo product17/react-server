@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports.helper = require('./form.helpers');
+module.exports = require('./form.helpers');

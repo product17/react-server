@@ -10,50 +10,6 @@ var _           = require('lodash'),
     procImage   = require(path.join(__libs, 'process-image'));
 
 
-
-// This is a syncronous function, it has no database hits
-module.exports.getFormSchema = function (field_list, data) {
-  var schema  = User.schema.tree;
-  data = data || {};
-
-  // Map the current data values
-  field_list = _.map(field_list, function (item, i) {
-    if (data[item.name]) {
-      item.value = data[item.name];
-      return item;
-    }
-
-    return item;
-  });
-
-  var list = _.map(field_list, function (item, key) {
-
-    if (item.override === true) {
-      return item;
-    }
-
-    if (item.name === 'submit') {
-      item.elem = 'submit';
-      return item;
-    }
-
-    if (!schema[item.name] || !schema[item.name].form) {
-      return {
-        error: 'Invalid Field: ' + item.name,
-        field_class: 'text-danger',
-        elem: 'error',
-      };;
-    }
-
-    item.elem = schema[item.name].form.elem;
-
-    return item;
-  });
-
-  // Default to the list if there is no failure
-  return list;
-};
-
 /**
  * Post new user to DB
  * @param  {Object} user_data The data from the form (req.body)
@@ -183,4 +139,33 @@ module.exports.details = function (_id) {
   });
 }
 
+
+module.exports.importImages = function (options) {
+  return new Promise(function (resolve, reject) {
+    var list = [];
+    var parallel = [];
+    _.forOwn(options, function (value, key) {
+      if (!key) {
+        return;
+      }
+      list.push({
+        key: key,
+        path: 'z_images/' + value
+      })
+      return;
+    });
+
+    list.forEach(function (item, i) {
+      procImage.processUserImage(item)
+        .then(function (image) {
+          User.findOneAndUpdate({email: item.key}, {$set: {user_image: image}}, {new: true})
+              .then(function (user) {
+                console.log(user)
+              });
+        });
+    });
+
+    resolve(list);
+  });
+}
 

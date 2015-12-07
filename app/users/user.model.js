@@ -32,18 +32,14 @@ var UserSchema = new Schema({
 		trim: true,
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your first name'],
-		form: {
-			elem: 'input',
-		},
+		form: 'input',
 	},
 	last_name: {
 		type: String,
 		trim: true,
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your last name'],
-		form: {
-			elem: 'input',
-		},
+		form: 'input',
 	},
 	display_name: {
 		type: String,
@@ -56,38 +52,28 @@ var UserSchema = new Schema({
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in your email'],
 		match: [/.+\@.+\..+/, 'Please fill a valid email address'],
-		form: {
-			elem: 'input',
-		},
+		form: 'input',
 	},
 	password: {
 		type: String,
 		default: '',
 		validate: [validateLocalStrategyPassword, 'Password should be longer'],
-		form: {
-			elem: 'input',
-		},
+		form: 'input',
 	},
 	bio: {
 		type: String,
 		default: '',
-		form: {
-			elem: 'textarea',
-		},
+		form: 'textarea',
 	},
 	web_site: {
 		type: String,
 		default: '',
-		form: {
-			elem: 'input',
-		},
+		form: 'input',
 	},
 	twitter: {
 		type: String,
 		default: '',
-		form: {
-			elem: 'input',
-		},
+		form: 'input',
 	},
 	user_image: {
 		type: {

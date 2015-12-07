@@ -34,6 +34,8 @@ app.use(menus);
 //   next();
 // });
 
+
+
 // Set the root paths
 
 app.use('/articles', articles);

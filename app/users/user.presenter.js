@@ -6,13 +6,16 @@ var async     = require('async'),
     ReactDOM  = require('react-dom/server');
 
 // Include the controller
-var controller = require('./user.controller');
+var controller  = require('./user.controller'),
+    User        = require('mongoose').model('User'),
+    forms       = require('../forms');
 
 // Include Components
 var component_UserList    = require('./components/build/user-list'),
     component_UserNew     = require('./components/build/user-new'),
     component_UserEdit    = require('./components/build/user-edit'),
     component_UserDetails = require('./components/build/user-details'),
+    component_UserImages  = require('./components/build/user-images'),
     component_UserLogin   = require('./components/build/user-login');
 
 // Setup Components
@@ -20,7 +23,8 @@ var UserList    = React.createFactory(component_UserList),
     UserNew     = React.createFactory(component_UserNew),
     UserEdit    = React.createFactory(component_UserEdit),
     UserDetails = React.createFactory(component_UserDetails),
-    UserLogin = React.createFactory(component_UserLogin);
+    UserImages  = React.createFactory(component_UserImages),
+    UserLogin   = React.createFactory(component_UserLogin);
 
 
 // Create Form
@@ -37,7 +41,7 @@ module.exports.create_form = function (req, res) {
     },
   ];
 
-  var form_schema = controller.getFormSchema(form_schema);
+  var form_schema = forms.getSchema(User.schema.tree, form_schema);
 
   form_schema.action = '/user/new';
 
@@ -89,7 +93,7 @@ module.exports.edit_form = function (req, res) {
   controller.details(req.params._id)
     .then(function (user) {
 
-      var form_schema = controller.getFormSchema(form_base, user);
+      var form_schema = forms.getSchema(User.schema.tree, form_base, user);
 
       res.render('index', {
         reactContent: ReactDOM.renderToString(UserEdit({form_schema: form_schema})),
@@ -168,7 +172,7 @@ module.exports.login = function (req, res) {
     },
   ];
 
-  var form_schema = controller.getFormSchema(form_schema);
+  var form_schema = forms.getSchema(User.schema.tree, form_schema);
 
   res.render('index', {
     reactContent: ReactDOM.renderToString(UserLogin({form_schema: form_schema})),
@@ -195,4 +199,19 @@ module.exports.isLoggedIn = function(req, res, next) {
 module.exports.logout = function (req, res) {
   req.logout();
   res.redirect('/');
+}
+
+
+
+module.exports.importImages = function (req, res) {
+
+  var imageList = require(path.join(__libs, 'image-list'));
+
+  controller.importImages(theList)
+      .then(function (list) {
+        res.render('index', {
+          reactContent: ReactDOM.renderToString(UserImages({list: list})),
+          client_data: {},
+        });
+      });
 }

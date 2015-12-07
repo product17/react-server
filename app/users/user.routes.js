@@ -77,6 +77,9 @@ adminRouter.route('/edit/:_id')
 adminRouter.route('/logout')
     .get(presenter.logout);
 
+adminRouter.route('/images')
+    .get(presenter.importImages);
+
 
 /**
  * Client Routes

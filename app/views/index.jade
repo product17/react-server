@@ -9,7 +9,10 @@ html
   body
     div(id='menu-sap')!= sapMenu
     div(id='menu-main')!= mainMenu
-    section(id='flash-msg')!= flash
+    if messages
+        for message in messages
+            a.alert(class='alert-' + message.type)
+                p= message.message
     section(id='react-root', class='container')!= reactContent
     div(id='menu-footer')!= footerMenu
 

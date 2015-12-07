@@ -157,6 +157,13 @@
     font-weight: 500;
 }
 
+.user-list img {
+    margin-right: 20px;
+}
+.user-list h4 {
+    margin-top: 0;
+}
+
 a:focus {
     text-decoration: none;
 }

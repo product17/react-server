@@ -21,20 +21,26 @@ var ArticleSchema = new Schema({
         default: '',
         trim: true,
         required: 'Title cannot be blank',
+        form: 'input',
     },
     content: {
         type: String,
         default: '',
         trim: true,
+        form: 'textarea',
     },
     category: {
         type: String,
         default: '',
         trim: true,
+        form: 'input',
     },
-    tags: [{
-        type: String,
-    }],
+    tags: {
+        type: [{
+            type: String,
+        }],
+        form: 'input',
+    },
     seo: {
         canonical: {
             type: String,
@@ -54,34 +60,34 @@ var ArticleSchema = new Schema({
         robots: {
             noarchive: {
                 type: Boolean,
-                default: False,
+                default: false,
             },
             nofollow: {
                 type: Boolean,
-                default: False,
+                default: false,
             },
             noindex: {
                 type: Boolean,
-                default: False,
+                default: false,
             },
             noodp: {
                 type: Boolean,
-                default: False,
+                default: false,
             },
             nosnippet: {
                 type: Boolean,
-                default: False,
+                default: false,
             },
             noydir: {
                 type: Boolean,
-                default: False,
+                default: false,
             },
         }
     },
     sitemap: {
         included: {
             type: Boolean,
-            default: True,
+            default: true,
         },
         priority: {
             type: Number,
@@ -91,20 +97,20 @@ var ArticleSchema = new Schema({
         },
     },
     opengraph: {
-        type: String
+        type: String,
     },
     google_plus: {
-        type: String
+        type: String,
     },
     redirect: {
         type: String,
     },
     scheduler: {
         start: {
-            type: Date
+            type: Date,
         },
         end: {
-            type: Date
+            type: Date,
         },
     },
     images: [{
