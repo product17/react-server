@@ -22,7 +22,8 @@ var fs             = require('fs'),
     mongoStore     = require('connect-mongo')(session),
     flash          = require('connect-flash'),
     config         = require('./config'),
-    path           = require('path');
+    path           = require('path'),
+    regional       = require(path.join(__libs, 'regional-codes'));
 
     /**
      * Normalize a port into a number, string, or false.
@@ -138,6 +139,8 @@ module.exports = function(db) {
 
     // Setting the app router and static folder
     app.use('/public', express.static(path.join(__dirname, '../public')));
+
+    app.use(regional.getCountry);
 
     // Routes need to be included before Error handling
     app.use(require('../app/routes'));

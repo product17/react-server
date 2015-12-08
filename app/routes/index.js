@@ -37,11 +37,11 @@ app.use(menus);
 
 
 // Set the root paths
-
-app.use('/articles', articles);
 app.use('/login', users.login);
-app.use('/admin/user', users.admin);
+app.use('/article', articles.client);
+app.use('/admin/article', articles.admin);
 app.use('/author', users.client);
+app.use('/admin/user', users.admin);
 app.use('/', home);
 
 

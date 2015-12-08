@@ -120,10 +120,13 @@ var ArticleSchema = new Schema({
         small_link: String,
     }],
     featured_image: {
-        link: String,
-        large_link: String,
-        medium_link: String,
-        small_link: String,
+        type: {
+            link: String,
+            large_link: String,
+            medium_link: String,
+            small_link: String,
+        },
+        form: 'image',
     },
     url: {
         type: String,
@@ -139,7 +142,7 @@ var ArticleSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: 'User',
-    }
+    },
 }).index({url: 1, country_code: 1, lang_code: 1}, {unique: true});
 
 
@@ -149,6 +152,8 @@ ArticleSchema.pre('save', function(next) {
     if(!this.seo['canonical']) {
         this.seo['canonical'] = this.url;
     }
+
+    next();
 });
 
 

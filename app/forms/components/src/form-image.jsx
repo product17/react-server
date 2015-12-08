@@ -20,7 +20,7 @@ var FormImage = React.createClass({
         imageClass  = ' ';
 
     if (field_info.value.link) {
-      imageClass += 'col-xs-9';
+      imageClass += 'col-xs-9 flush-right';
 
       renderImage = (
         <div className='col-xs-3 flush'>

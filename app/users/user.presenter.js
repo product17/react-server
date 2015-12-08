@@ -72,11 +72,7 @@ module.exports.create = function (req, res) {
 module.exports.edit_form = function (req, res) {
 
   var form_base = [
-    {
-      name: 'user_image',
-      elem: 'image',
-      override: true,
-    },
+    {name: 'user_image'},
     {name: 'first_name'},
     {name: 'last_name'},
     {name: 'email'},
@@ -98,7 +94,7 @@ module.exports.edit_form = function (req, res) {
       res.render('index', {
         reactContent: ReactDOM.renderToString(UserEdit({form_schema: form_schema})),
         client_data: {
-          form_schema
+          form_schema: form_schema,
         },
       });
     })

@@ -81,6 +81,7 @@ var UserSchema = new Schema({
 			small: String,
 			x_small: String,
 		},
+		form: 'image',
 	},
 	country_code: {
 		type: [{

@@ -9,3 +9,10 @@ module.exports.listCountries = function () {
 module.exports.listLanguages = function () {
 	return ['EN', 'FR', 'ES', 'DE', 'ZH'];
 };
+
+// Return Current Country
+// Middleware for the express configs
+module.exports.getCountry = function (req, res, next) {
+	console.log('test')
+	next();
+};
